@@ -6,6 +6,8 @@ use Bjorvack\ImageStacker\Exceptions\StackCantGrowException;
 
 class Stacker
 {
+    private $name;
+    
     private $images = [];
 
     private $freeSpaces = [];
@@ -34,8 +36,9 @@ class Stacker
      */
     private $growHorizontal;
 
-    public function __construct($maxWidth = null, $maxHeight = null, $growVertical = true, $growHorizontal = true)
+    public function __construct($name, $maxWidth = null, $maxHeight = null, $growVertical = true, $growHorizontal = true)
     {
+        $this->name = $name;
         $this->maxWidth = $maxWidth;
         $this->maxHeight = $maxHeight;
         $this->growVertical = $growVertical;
@@ -167,6 +170,14 @@ class Stacker
                 return true;
             }
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
