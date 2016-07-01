@@ -36,29 +36,69 @@ class Image
      */
     private $y = 0;
 
+    /**
+     * Image constructor.
+     *
+     * @param string $filePath
+     * @param string $name
+     * @param int|null $width
+     * @param int|null $height
+     */
     public function __construct($filePath, $name, $width = null, $height = null)
     {
         $this->filePath = $filePath;
         $this->name = $name;
         $this->width = $width;
         $this->height = $height;
+
+        if ($height === null || $width === null) {
+            $this->setDimensions();
+        }
     }
 
+    /**
+     * Get the image dimensions from the file.
+     */
+    private function setDimensions()
+    {
+        list($width, $height) = getimagesize($this->filePath);
+
+        if ($this->height === null) {
+            $this->height = $height;
+        }
+
+        if ($this->width === null) {
+            $this->width = $width;
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getFilePath()
     {
-        return $this->getFilePath();
+        return $this->filePath;
     }
 
+    /**
+     * @return int|null
+     */
     public function getWidth()
     {
         return $this->width;
     }
 
+    /**
+     * @return int|null
+     */
     public function getHeight()
     {
         return $this->height;
@@ -108,17 +148,27 @@ class Image
      * Creates an image from a stacker.
      *
      * @param Stacker $stacker
-     * @param $filename
+     * @param string $storagePath
+     *
+     * @return Image
      */
-    public static function createFromStacker(Stacker $stacker, $filename)
+    public static function createFromStacker(Stacker $stacker, $storagePath)
     {
-        $image = ImageManagerStatic::canvas($stacker->getSize()['width'], $stacker->getSize()['width']);
-        $tile = null;
+        $imageCanvas = ImageManagerStatic::canvas($stacker->getSize()['width'], $stacker->getSize()['width']);
 
         foreach ($stacker->getImages() as $image) {
-            $image->insert($image->filepath, null, $image->x, $image->y);
+            $imageCanvas->insert($image->filePath, null, $image->x, $image->y);
         }
 
-        $image->save($filename);
+        $filename = $storagePath.'/'.$stacker->getName().'.png';
+        
+        $imageCanvas->save($filename);
+
+        return new self(
+            $filename,
+            $stacker->getName(),
+            $stacker->getSize()['width'],
+            $stacker->getSize()['height']
+        );
     }
 }
