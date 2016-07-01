@@ -1,0 +1,26 @@
+{
+    "name": "bjorn/image-stacker",
+    "require": {
+        "php": ">=5.5.0",
+        "intervention/image": "^2.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.2 || ^4.8"
+    },
+    "authors": [
+        {
+            "name": "bjorvack",
+            "email": "bjorvack@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bjorvack\\ImageStacker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "src/Tests/BaseTest.php"
+        ]
+    }
+}
