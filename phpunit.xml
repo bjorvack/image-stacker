@@ -17,5 +17,11 @@
         <blacklist>
             <directory>./vendor</directory>
         </blacklist>
+        <whitelist>
+            <directory>src</directory>
+            <exclude>
+                <directory>src/Tests</directory>
+            </exclude>
+        </whitelist>
     </filter>
 </phpunit>
