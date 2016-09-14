@@ -44,11 +44,15 @@ class ImageUnitTest extends BaseTest
         $this->assertEquals(200, $image->getX());
         $this->assertEquals(300, $image->getY());
     }
-    
+
     public function testCreateFromStacker()
     {
         $stacker = new Stacker('unitTest');
         $image = new Image($this->fileName, 'bjorvack');
+        $stacker->addImage($image);
+        $image = new Image($this->fileName, 'bjorvack_2', 100, 100);
+        $stacker->addImage($image);
+        $image = new Image($this->fileName, 'bjorvack_2', 50, 50);
         $stacker->addImage($image);
         $stacker->stack();
 

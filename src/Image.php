@@ -4,7 +4,7 @@ namespace Bjorvack\ImageStacker;
 
 use Intervention\Image\ImageManagerStatic;
 
-class Image
+class Image implements \JsonSerializable
 {
     /**
      * @var string
@@ -29,12 +29,12 @@ class Image
     /**
      * @var int
      */
-    private $x = 0;
+    private $x = null;
 
     /**
      * @var int
      */
-    private $y = 0;
+    private $y = null;
 
     /**
      * Image constructor.
@@ -161,7 +161,7 @@ class Image
         }
 
         $filename = $storagePath.'/'.$stacker->getName().'.png';
-        
+
         $imageCanvas->save($filename);
 
         return new self(
@@ -170,5 +170,31 @@ class Image
             $stacker->getSize()['width'],
             $stacker->getSize()['height']
         );
+    }
+
+    /**
+     * Specify data which should be serialized to JSON.
+     *
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     *
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->name,
+            'path' => $this->filePath,
+            'size' => [
+                'width' => $this->width,
+                'height' => $this->height,
+            ],
+            'position' => [
+                'x' => $this->x,
+                'y' => $this->y,
+            ],
+        ];
     }
 }

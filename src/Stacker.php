@@ -4,10 +4,10 @@ namespace Bjorvack\ImageStacker;
 
 use Bjorvack\ImageStacker\Exceptions\StackCantGrowException;
 
-class Stacker
+class Stacker implements \JsonSerializable
 {
     private $name;
-    
+
     private $images = [];
 
     private $freeSpaces = [];
@@ -61,6 +61,16 @@ class Stacker
     public function stack()
     {
         usort($this->images, [$this, 'imageSorter']);
+
+        if ($this->width === 0) {
+            $this->width = $this->images[0]->getWidth();
+        }
+
+        if ($this->height === 0) {
+            $this->height = $this->images[0]->getHeight();
+        }
+
+        $this->freeSpaces[] = new FreeSpace(0, 0, $this->width, $this->height);
 
         foreach ($this->images as $image) {
             if ($this->hasSpace($image)) {
@@ -143,7 +153,7 @@ class Stacker
      *
      * @param Image $image
      */
-    private function putImageInFreeSpace(Image $image)
+    private function putImageInFreeSpace(Image &$image)
     {
         foreach ($this->freeSpaces as $key => $freeSpace) {
             if ($freeSpace->imageFits($image)) {
@@ -170,6 +180,8 @@ class Stacker
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
@@ -251,5 +263,27 @@ class Stacker
     public function getFreeSpaces()
     {
         return $this->freeSpaces;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON.
+     *
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     *
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->name,
+            'size' => [
+                'width' => $this->width,
+                'height' => $this->height,
+            ],
+            'images' => $this->images,
+        ];
     }
 }

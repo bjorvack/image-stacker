@@ -3,8 +3,9 @@
 namespace Bjorvack\ImageStacker;
 
 use Bjorvack\ImageStacker\Exceptions\CantPlaceImageException;
+use Bjorvack\ImageStacker\Exceptions\InvalidSizeException;
 
-class FreeSpace
+class FreeSpace implements \JsonSerializable
 {
     /**
      * @var string
@@ -28,6 +29,10 @@ class FreeSpace
 
     public function __construct($x, $y, $width = null, $height = null)
     {
+        if ($width <= 0 || $height <= 0) {
+            throw new InvalidSizeException('A free space must have a with and height');
+        }
+
         $this->x = $x;
         $this->y = $y;
         $this->width = $width;
@@ -61,7 +66,11 @@ class FreeSpace
 
         $freeSpaces = [];
 
-        if ($image->getWidth() < $this->width && $image->getHeight() === $this->height) {
+        if ($image->getWidth() < $this->width &&
+            $image->getHeight() === $this->height &&
+            $this->height >= 0 &&
+            ($this->width - $image->getWidth()) > 0
+        ) {
             $freeSpaces[] = new self(
                 ($this->x + $image->getWidth()),
                 $this->y,
@@ -70,7 +79,11 @@ class FreeSpace
             );
         }
 
-        if ($image->getWidth() === $this->width && $image->getHeight() < $this->height) {
+        if ($image->getWidth() === $this->width &&
+            $image->getHeight() < $this->height &&
+            $this->width >= 0 &&
+            ($this->height - $image->getHeight()) > 0
+        ) {
             $freeSpaces[] = new self(
                 $this->x,
                 ($this->y + $image->getHeight()),
@@ -79,7 +92,11 @@ class FreeSpace
             );
         }
 
-        if ($image->getWidth() < $this->width && $image->getHeight() < $this->height) {
+        if ($image->getWidth() < $this->width &&
+            $image->getHeight() < $this->height &&
+            ($this->width - $image->getWidth()) > 0 &&
+            ($this->height - $image->getHeight()) > 0
+        ) {
             $freeSpaces[] = new self(
                 ($this->x + $image->getWidth()),
                 $this->y,
@@ -96,5 +113,29 @@ class FreeSpace
         }
 
         return $freeSpaces;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON.
+     *
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     *
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'size' => [
+              'width' => $this->width,
+              'height' => $this->height,
+            ],
+            'position' => [
+                'x' => $this->x,
+                'y' => $this->y,
+            ],
+        ];
     }
 }
