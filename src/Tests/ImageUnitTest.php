@@ -50,10 +50,6 @@ class ImageUnitTest extends BaseTest
         $stacker = new Stacker('unitTest');
         $image = new Image($this->fileName, 'bjorvack');
         $stacker->addImage($image);
-        $image = new Image($this->fileName, 'bjorvack_2', 100, 100);
-        $stacker->addImage($image);
-        $image = new Image($this->fileName, 'bjorvack_2', 50, 50);
-        $stacker->addImage($image);
         $stacker->stack();
 
         $packedImage = $this->storagePath.'/'.$stacker->getName().'.png';
