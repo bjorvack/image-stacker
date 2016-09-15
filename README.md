@@ -1,5 +1,8 @@
 #Image stacker
-
+[![Latest Version](https://img.shields.io/github/release/bjorvack/image-stacker.svg?style=flat-square)](https://github.com/bjorvack/image-stacker/releases)
+[![](https://img.shields.io/github/issues-raw/badges/shields.svg?maxAge=2592000)](https://github.com/bjorvack/image-stacker/issues)
+[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?maxAge=2592000)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/bjorvack/image-stacker.svg?style=flat-square)](https://travis-ci.org/bjorvack/image-stacker)
 Image stacker is a package to combine different images to one single image.
 
 ##Instalation
