@@ -1,5 +1,5 @@
 {
-    "name": "bjorn/image-stacker",
+    "name": "bjorvack/image-stacker",
     "require": {
         "php": ">=5.5.0",
         "intervention/image": "^2.3"
