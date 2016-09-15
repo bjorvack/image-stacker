@@ -1,6 +1,7 @@
 {
     "name": "bjorvack/image-stacker",
     "license": "MIT",
+    "keywords": ["images","merger-tool","image merge"],
     "require": {
         "php": ">=5.5.0",
         "intervention/image": "^2.3"
