@@ -64,10 +64,16 @@ class Stacker implements \JsonSerializable
 
         if ($this->width === 0) {
             $this->width = $this->images[0]->getWidth();
+            if ($this->maxWidth < $this->width && $this->maxWidth != null) {
+                $this->width = $this->maxWidth;
+            }
         }
 
         if ($this->height === 0) {
             $this->height = $this->images[0]->getHeight();
+            if ($this->maxHeight < $this->height && $this->maxHeight != null) {
+                $this->height = $this->maxHeight;
+            }
         }
 
         $this->freeSpaces[] = new FreeSpace(0, 0, $this->width, $this->height);
