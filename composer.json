@@ -1,5 +1,6 @@
 {
     "name": "bjorvack/image-stacker",
+    "license": "MIT",
     "require": {
         "php": ">=5.5.0",
         "intervention/image": "^2.3"
