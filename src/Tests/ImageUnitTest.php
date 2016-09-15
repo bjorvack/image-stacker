@@ -2,7 +2,6 @@
 
 namespace Bjorvack\ImageStacker\Tests;
 
-use Bjorvack\ImageStacker\FreeSpace;
 use Bjorvack\ImageStacker\Image;
 use Bjorvack\ImageStacker\Stacker;
 
@@ -18,35 +17,6 @@ class ImageUnitTest extends BaseTest
 
         $this->fileName = dirname(__FILE__) .'/bjorvack.png';
         $this->storagePath = dirname(__FILE__);
-    }
-
-    /**
-     * @expectedException Bjorvack\ImageStacker\Exceptions\CantPlaceImageException
-     */
-    public function testCantPlaceImageException()
-    {
-        $freeSpace = new FreeSpace(0, 0, 1, 1);
-        $image = new Image($this->fileName, 'testimage');
-        $freeSpace->placeImage($image);
-    }
-
-    /**
-     * @expectedException Bjorvack\ImageStacker\Exceptions\InvalidSizeException
-     */
-    public function testInvalidSizeException()
-    {
-        $freeSpace = new FreeSpace(0, 0, 0, 0);
-    }
-
-    /**
-     * @expectedException Bjorvack\ImageStacker\Exceptions\StackCantGrowException
-     */
-    public function testStackCantGrowException()
-    {
-        $stacker = new Stacker('unittest', 10, 10, false, false);
-        $image = new Image($this->fileName, 'testimage');
-        $stacker->addImage($image);
-        $stacker->stack();
     }
 
     public function testImageCreation()
@@ -91,5 +61,12 @@ class ImageUnitTest extends BaseTest
         $this->assertTrue(file_exists($packedImage));
 
         unlink($packedImage);
+    }
+
+    public function testJsonData()
+    {
+        $image = new Image('./testimage.png', 'testimage', 200, 300);
+        $json = json_encode($image);
+        $this->assertEquals('{"name":"testimage","path":".\/testimage.png","size":{"width":200,"height":300},"position":{"x":null,"y":null}}', $json);
     }
 }
