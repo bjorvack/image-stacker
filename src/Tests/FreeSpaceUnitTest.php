@@ -50,6 +50,28 @@ class FreeSpaceUnitTest extends BaseTest
         foreach ($spaces as $subspace) {
             $this->assertInstanceOf(FreeSpace::class, $subspace);
         }
+
+        $space = new FreeSpace(0, 0, 100, 100);
+        $image = new Image($this->fileName, 'unitTest', 100, 10);
+
+        $spaces = $space->placeImage($image);
+        $this->assertInternalType('array', $spaces);
+        $this->assertEquals(1, count($spaces));
+
+        foreach ($spaces as $subspace) {
+            $this->assertInstanceOf(FreeSpace::class, $subspace);
+        }
+
+        $space = new FreeSpace(0, 0, 100, 100);
+        $image = new Image($this->fileName, 'unitTest', 10, 100);
+
+        $spaces = $space->placeImage($image);
+        $this->assertInternalType('array', $spaces);
+        $this->assertEquals(1, count($spaces));
+
+        foreach ($spaces as $subspace) {
+            $this->assertInstanceOf(FreeSpace::class, $subspace);
+        }
     }
 
     public function testJsonData()
