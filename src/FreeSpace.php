@@ -49,7 +49,7 @@ class FreeSpace implements \JsonSerializable
     public function imageFits(Image $image)
     {
         if ($image->getHeight() > $this->height || $image->getWidth() > $this->width) {
-            return;
+            return false;
         }
 
         return true;
