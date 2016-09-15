@@ -1,7 +1,8 @@
 {
     "name": "bjorvack/image-stacker",
+    "description": "Image stacker is a package to combine different images to one single image.",
     "license": "MIT",
-    "keywords": ["images","merger-tool","image merge"],
+    "keywords": ["image","merger-tool","merge", "combine"],
     "require": {
         "php": ">=5.5.0",
         "intervention/image": "^2.3"
