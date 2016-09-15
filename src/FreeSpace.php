@@ -27,6 +27,16 @@ class FreeSpace implements \JsonSerializable
      */
     private $height;
 
+    /**
+     * FreeSpace constructor.
+     *
+     * @param $x
+     * @param $y
+     * @param null $width
+     * @param null $height
+     *
+     * @throws InvalidSizeException
+     */
     public function __construct($x, $y, $width = null, $height = null)
     {
         if ($width <= 0 || $height <= 0) {
@@ -55,6 +65,15 @@ class FreeSpace implements \JsonSerializable
         return true;
     }
 
+    /**
+     * Places an image in a free space.
+     *
+     * @param Image $image
+     *
+     * @return array
+     *
+     * @throws CantPlaceImageException
+     */
     public function placeImage(Image $image)
     {
         if (!$this->imageFits($image)) {

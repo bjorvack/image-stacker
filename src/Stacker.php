@@ -6,14 +6,29 @@ use Bjorvack\ImageStacker\Exceptions\StackCantGrowException;
 
 class Stacker implements \JsonSerializable
 {
+    /**
+     * @var string
+     */
     private $name;
 
+    /**
+     * @var array<Image>
+     */
     private $images = [];
 
+    /**
+     * @var array<FreeSpace>
+     */
     private $freeSpaces = [];
 
+    /**
+     * @var int
+     */
     private $width = 0;
 
+    /**
+     * @var int
+     */
     private $height = 0;
 
     /**
@@ -36,6 +51,15 @@ class Stacker implements \JsonSerializable
      */
     private $growHorizontal;
 
+    /**
+     * Stacker constructor.
+     *
+     * @param $name
+     * @param null $maxWidth
+     * @param null $maxHeight
+     * @param bool $growVertical
+     * @param bool $growHorizontal
+     */
     public function __construct($name, $maxWidth = null, $maxHeight = null, $growVertical = true, $growHorizontal = true)
     {
         $this->name = $name;
