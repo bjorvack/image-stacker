@@ -37,7 +37,7 @@ class JsonExporterTest extends BaseTest
         
         $this->assertEquals(
             file_get_contents($packedJson),
-            '{"name":"unitTest","size":{"width":180,"height":180},"images":[{"name":"bjorvack","path":"\/Users\/bjorn\/Sites\/bjorvack\/game-engine-backend-project\/packages\/bjorvack\/image-stacker\/src\/Tests\/bjorvack.png","size":{"width":180,"height":180},"position":{"x":0,"y":0}}]}'
+            '{"name":"unitTest","size":{"width":180,"height":180},"images":[{"name":"bjorvack","path":"' . $filename = str_replace('/', '\/', $this->fileName) . '","size":{"width":180,"height":180},"position":{"x":0,"y":0}}]}'
         );
 
         unlink($packedImage);
