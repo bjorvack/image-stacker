@@ -2,6 +2,7 @@
 
 namespace Bjorvack\ImageStacker\Tests;
 
+use Bjorvack\ImageStacker\Helpers\StringTransformer;
 use Bjorvack\ImageStacker\Image;
 use Bjorvack\ImageStacker\Stacker;
 
@@ -52,7 +53,7 @@ class ImageUnitTest extends BaseTest
         $stacker->addImage($image);
         $stacker->stack();
 
-        $packedImage = $this->storagePath.'/'.$stacker->getName().'.png';
+        $packedImage = $this->storagePath.'/'.StringTransformer::slugify($stacker->getName()).'.png';
 
         $this->assertNotTrue(file_exists($packedImage));
         $image = Image::createFromStacker($stacker, $this->storagePath);

@@ -2,6 +2,7 @@
 
 namespace Bjorvack\ImageStacker;
 
+use Bjorvack\ImageStacker\Helpers\StringTransformer;
 use Intervention\Image\ImageManagerStatic;
 
 class Image implements \JsonSerializable
@@ -160,7 +161,7 @@ class Image implements \JsonSerializable
             $imageCanvas->insert($image->filePath, null, $image->x, $image->y);
         }
 
-        $filename = $storagePath.'/'.$stacker->getName().'.png';
+        $filename = $storagePath.'/'.StringTransformer::slugify($stacker->getName()).'.png';
 
         $imageCanvas->save($filename);
 

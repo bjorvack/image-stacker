@@ -2,7 +2,6 @@
 
 namespace Bjorvack\ImageStacker\Tests;
 
-use Bjorvack\ImageStacker\FreeSpace;
 use Bjorvack\ImageStacker\Image;
 use Bjorvack\ImageStacker\Stacker;
 

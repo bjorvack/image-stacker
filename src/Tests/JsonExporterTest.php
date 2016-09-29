@@ -3,6 +3,7 @@
 namespace Bjorvack\ImageStacker\Tests;
 
 use Bjorvack\ImageStacker\Exporters\JsonExporter;
+use Bjorvack\ImageStacker\Helpers\StringTransformer;
 use Bjorvack\ImageStacker\Image;
 use Bjorvack\ImageStacker\Stacker;
 
@@ -29,12 +30,12 @@ class JsonExporterTest extends BaseTest
 
         JsonExporter::save($stacker, $this->storagePath);
 
-        $packedImage = $this->storagePath.'/'.$stacker->getName().'.png';
-        $packedJson = $this->storagePath.'/'.$stacker->getName().'.json';
+        $packedImage = $this->storagePath.'/'.StringTransformer::slugify($stacker->getName()).'.png';
+        $packedJson = $this->storagePath.'/'.StringTransformer::slugify($stacker->getName()).'.json';
 
-        $this->assertTrue(file_exists($packedImage));
-        $this->assertTrue(file_exists($packedJson));
-        
+        $this->assertTrue(file_exists($packedImage), $packedImage . " doesn't exist");
+        $this->assertTrue(file_exists($packedJson), $packedJson . " doesn't exist");
+
         $this->assertEquals(
             file_get_contents($packedJson),
             '{"name":"unitTest","size":{"width":180,"height":180},"images":[{"name":"bjorvack","path":"' . $filename = str_replace('/', '\/', $this->fileName) . '","size":{"width":180,"height":180},"position":{"x":0,"y":0}}]}'

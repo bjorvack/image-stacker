@@ -2,6 +2,8 @@
 
 namespace Bjorvack\ImageStacker\Exporters;
 
+use Bjorvack\ImageStacker\Helpers\FileManager;
+use Bjorvack\ImageStacker\Helpers\StringTransformer;
 use Bjorvack\ImageStacker\Stacker;
 
 class JsonExporter extends Exporter
@@ -17,11 +19,12 @@ class JsonExporter extends Exporter
     {
         $image = $this->createImage($path);
 
-        $filename = rtrim($path, '/') . '/' . $this->stacker->getName() . '.json';
+        $filename = rtrim($path, '/') . '/' . StringTransformer::slugify($this->stacker->getName()) . '.json';
 
-        $fp = fopen($filename, 'w');
-        fwrite($fp, json_encode($this->stacker));
-        fclose($fp);
+        FileManager::save(
+            json_encode($this->stacker),
+            $filename
+        );
 
         return [
             'file' => $filename,
