@@ -19,4 +19,9 @@ class StringTransformer
 
         return $string;
     }
+    
+    public static function removeWhiteSpace($string)
+    {
+        return str_replace("\r", '', str_replace("\n", '', str_replace("\t", '', str_replace(' ', '', $string))));
+    }
 }

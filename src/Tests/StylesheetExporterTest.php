@@ -40,16 +40,11 @@ class StylesheetExporterTest extends BaseTest
         $css .= '.unittest-bjorvack{width:180px;height:180px;background-position:0px0px;}';
 
         $this->assertEquals(
-            $this->simplyfyString(file_get_contents($packedCSS)),
+            StringTransformer::removeWhiteSpace(file_get_contents($packedCSS)),
             $css
         );
 
         unlink($packedImage);
         unlink($packedCSS);
-    }
-
-    private function simplyfyString($text)
-    {
-        return str_replace("\r", '', str_replace("\n", '', str_replace("\t", '', str_replace(' ', '', $text))));
     }
 }
