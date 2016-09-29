@@ -2,6 +2,7 @@
 
 namespace Bjorvack\ImageStacker\Exporters;
 
+use Bjorvack\ImageStacker\Helpers\FileManager;
 use Bjorvack\ImageStacker\Helpers\StringTransformer;
 use Bjorvack\ImageStacker\Stacker;
 
@@ -23,9 +24,10 @@ class StylesheetExporter extends Exporter
 
         $filename = rtrim($path, '/') . '/' . StringTransformer::slugify($this->stacker->getName()) . '.css';
 
-        $fp = fopen($filename, 'w');
-        fwrite($fp, $this->convertStackToCss($this->stacker, $image->getFilePath()));
-        fclose($fp);
+        FileManager::save(
+            $this->convertStackToCss($this->stacker, $image->getFilePath()),
+            $filename
+        );
 
         return [
             'file' => $filename,

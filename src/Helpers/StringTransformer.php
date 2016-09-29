@@ -4,6 +4,13 @@ namespace Bjorvack\ImageStacker\Helpers;
 
 class StringTransformer
 {
+    /**
+     * Transforms the string to a valid slug.
+     *
+     * @param $string
+     *
+     * @return string
+     */
     public static function slugify($string)
     {
         $string = utf8_encode($string);
@@ -19,7 +26,14 @@ class StringTransformer
 
         return $string;
     }
-    
+
+    /***
+     * Removes all whitespaces and newlines.
+     *
+     * @param $string
+     *
+     * @return string
+     */
     public static function removeWhiteSpace($string)
     {
         return str_replace("\r", '', str_replace("\n", '', str_replace("\t", '', str_replace(' ', '', $string))));
