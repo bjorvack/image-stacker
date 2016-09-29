@@ -33,8 +33,8 @@ class JsonExporterTest extends BaseTest
         $packedImage = $this->storagePath.'/'.StringTransformer::slugify($stacker->getName()).'.png';
         $packedJson = $this->storagePath.'/'.StringTransformer::slugify($stacker->getName()).'.json';
 
-        $this->assertTrue(file_exists($packedImage));
-        $this->assertTrue(file_exists($packedJson));
+        $this->assertTrue(file_exists($packedImage), $packedImage . " doesn't exist");
+        $this->assertTrue(file_exists($packedJson), $packedJson . " doesn't exist");
 
         $this->assertEquals(
             file_get_contents($packedJson),
