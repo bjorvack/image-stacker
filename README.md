@@ -55,4 +55,13 @@ foreach($stacker->getImages() as $image) {
 }
 ```
 
+###Exporters
 
+A stack can be exported as a `.json` file or a `.css` file. The `.png` file is made automatically.
+
+```php
+$stacker = new Stacker('name');
+
+JsonExporter::save($stacker, 'path');
+StylesheetExporter::save($stacker, 'path');
+```
