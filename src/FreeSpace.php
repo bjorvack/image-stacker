@@ -70,9 +70,9 @@ class FreeSpace implements \JsonSerializable
      *
      * @param Image $image
      *
-     * @return array
-     *
      * @throws CantPlaceImageException
+     *
+     * @return array
      */
     public function placeImage(Image $image)
     {

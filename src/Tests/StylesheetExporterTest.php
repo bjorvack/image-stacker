@@ -26,7 +26,6 @@ class StylesheetExporterTest extends BaseTest
         $stacker = new Stacker('unitTest');
         $image = new Image($this->fileName, 'bjorvack');
         $stacker->addImage($image);
-        $stacker->stack();
 
         StylesheetExporter::save($stacker, $this->storagePath);
 

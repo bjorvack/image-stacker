@@ -51,7 +51,6 @@ class ImageUnitTest extends BaseTest
         $stacker = new Stacker('unitTest');
         $image = new Image($this->fileName, 'bjorvack');
         $stacker->addImage($image);
-        $stacker->stack();
 
         $packedImage = $this->storagePath.'/'.StringTransformer::slugify($stacker->getName()).'.png';
 

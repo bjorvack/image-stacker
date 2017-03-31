@@ -34,12 +34,9 @@ $image = new Image('path', 'name', <int width>, <int height>);
 $stacker->addImage($image);
 ```
 
-###Stacking the images
-
-When all the images are added to the stack the `stack` function can be called to organize the images.
+###Creating the stacked image
 
 ```php
-$stacker->stack();
 $image = Image::createFromStacker($stacker, 'storagepath');
 ```
 

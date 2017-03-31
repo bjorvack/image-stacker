@@ -58,9 +58,6 @@ class StackerUnitTest extends BaseTest
         $image = new Image($this->fileName, 'unitTest', 20, 20);
         $stacker->addImage($image);
 
-        $stacker->stack();
-
-        $this->assertEquals(2, count($stacker->getFreeSpaces()));
         $this->assertEquals(3, count($stacker->getImages()));
     }
 
@@ -69,7 +66,6 @@ class StackerUnitTest extends BaseTest
         $stacker = new Stacker('unitTest', 8000, 8000);
         $image = new Image($this->fileName, 'unitTest');
         $stacker->addImage($image);
-        $stacker->stack();
 
         $this->assertInternalType('array', $stacker->getSize());
         $this->assertEquals(180, $stacker->getSize()['width']);
@@ -81,7 +77,6 @@ class StackerUnitTest extends BaseTest
         $stacker = new Stacker('unitTest', 8000, 8000);
         $image = new Image($this->fileName, 'unitTest');
         $stacker->addImage($image);
-        $stacker->stack();
         $json = json_encode($stacker);
 
         $filename = str_replace('/', '\/', $this->fileName);

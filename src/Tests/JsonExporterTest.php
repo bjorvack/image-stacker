@@ -26,7 +26,6 @@ class JsonExporterTest extends BaseTest
         $stacker = new Stacker('unitTest');
         $image = new Image($this->fileName, 'bjorvack');
         $stacker->addImage($image);
-        $stacker->stack();
 
         JsonExporter::save($stacker, $this->storagePath);
 

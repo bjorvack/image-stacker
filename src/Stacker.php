@@ -77,12 +77,13 @@ class Stacker implements \JsonSerializable
     public function addImage(Image $image)
     {
         $this->images[] = $image;
+        $this->stack();
     }
 
     /**
      * Stacks the images in a single image.
      */
-    public function stack()
+    private function stack()
     {
         usort($this->images, [$this, 'imageSorter']);
 

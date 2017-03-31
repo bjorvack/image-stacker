@@ -49,7 +49,6 @@ class ExceptionsUnitTest extends BaseTest
         $stacker = new Stacker('unittest', 10, 10, false, false);
         $image = new Image($this->fileName, 'testimage');
         $stacker->addImage($image);
-        $stacker->stack();
     }
 
     public function testExceptions()
