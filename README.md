@@ -1,4 +1,4 @@
-#Image stacker
+# Image stacker
 [![Latest Version](https://img.shields.io/github/release/bjorvack/image-stacker.svg?style=flat-square)](https://github.com/bjorvack/image-stacker/releases)
 [![GitHub issues open](https://img.shields.io/github/issues-raw/bjorvack/image-stacker.svg?style=flat-square&maxAge=2592000)](https://github.com/bjorvack/image-stacker/issues)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square&maxAge=2592000)](LICENSE.md)
@@ -6,15 +6,15 @@
 
 Image stacker is a package to combine different images to one single image.
 
-##Instalation
+## Instalation
 
 ```
 composer install bjorvack/image-stacker
 ```
 
-##Usage
+## Usage
 
-###Creating a new stack
+### Creating a new stack
 
 Creating a new stack only requires a stack name. Giving the stack additional parameters like max width or height limits the way the stack can grow.
 
@@ -23,7 +23,7 @@ $stacker = new Stacker('name');
 $stacker = new Stacker('name', <int maxWidth>, <int maxWidth>, <bool growVertical>, <bool growHorizontal>);
 ```
 
-###Adding images to the stack
+### Adding images to the stack
 
 Using the the `addImage` function an `Image` object can be added to the stack.
 
@@ -34,13 +34,13 @@ $image = new Image('path', 'name', <int width>, <int height>);
 $stacker->addImage($image);
 ```
 
-###Creating the stacked image
+### Creating the stacked image
 
 ```php
 $image = Image::createFromStacker($stacker, 'storagepath');
 ```
 
-###Getting the position of an image in the stack
+### Getting the position of an image in the stack
 
 When the stack function is called the `x` and `y` attributes for the images are set.
 You can access the using the `getX` and `getY` functions.
@@ -52,7 +52,7 @@ foreach($stacker->getImages() as $image) {
 }
 ```
 
-###Exporters
+### Exporters
 
 A stack can be exported as a `.json` file or a `.css` file. The `.png` file is made automatically.
 
